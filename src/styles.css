@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+
+.contact-icon {
+  @apply w-4 h-4 mx-2;
+}
+
+.section-header {
+  @apply text-2xl text-blue-700 tracking-widest py-2 pr-5 border-b-2 border-blue-200 w-40;
+}
+
+html {
+  background: #fcfcfc;
+}
+
+@tailwind utilities;

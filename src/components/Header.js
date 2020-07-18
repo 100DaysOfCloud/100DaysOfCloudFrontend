@@ -36,7 +36,7 @@ class Header extends Component {
                                 <AccountDropdown />
                             </span>
                         ) : (
-                            <Link to='log-in' className='ml-10 text-xl'>
+                            <Link to='/log-in' className='ml-10 text-xl'>
                                 <span className='px-4 py-2 bg-gray-800 text-white rounded-lg'>
                                     Log In
                                 </span>

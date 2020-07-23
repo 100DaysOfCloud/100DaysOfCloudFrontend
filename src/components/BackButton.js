@@ -4,14 +4,10 @@ import { Link } from 'gatsby';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
-class BackButton extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+export default class BackButton extends Component {
     render() {
         return (
-            <span className='fixed'>
+            <span className="fixed">
                 <Link to={this.props.link}>
                     <IoMdArrowRoundBack size={32} />
                 </Link>
@@ -19,5 +15,3 @@ class BackButton extends Component {
         );
     }
 }
-
-export default BackButton;

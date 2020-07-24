@@ -13,4 +13,17 @@ html {
   background: #fcfcfc;
 }
 
+.f-32{
+  @apply w-1/3 h-auto block ml-auto mr-auto
+}
+
+.site{
+  @apply flex min-h-screen flex-col
+}
+
+.site-content{
+  @apply flex-grow
+}
+
+
 @tailwind utilities;

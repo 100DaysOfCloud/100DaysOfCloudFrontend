@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { NameAndHandle, ProfileImage, ProfileBio } from '../ProfileComponents';
+import { NameAndHandle, ProfileImage, ProfileBio } from './ProfileComponents';
+
 
 
 const ProfileContent = (props, contactDirection) => {
@@ -91,9 +92,6 @@ const ProfileContent = (props, contactDirection) => {
         );
     }
 };
-
-
-
 
 
 const ProfileBadge = (props) => {

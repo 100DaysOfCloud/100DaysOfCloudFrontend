@@ -7,6 +7,7 @@ const NameAndHandle = (props) => {
     if (props.size === 'small') {
         nameImagePadding = '4';
     }
+    
     if (props.contactDirection === 'right') {
         textMargin = 'ml-';
     }

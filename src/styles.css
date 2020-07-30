@@ -33,9 +33,5 @@ li {
   @apply ml-24 text-base list-disc;
 }
 
-.p-rules{
-  
-  @apply ml-12 text-base font-sans;
-}
 
 @tailwind utilities;

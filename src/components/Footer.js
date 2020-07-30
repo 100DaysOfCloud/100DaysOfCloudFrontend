@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { FaTwitter, FaDiscord, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const Footer = () => {
+export default function Footer() {
     return (
         <div className="w-full text-center p-4 pin-b mt-8 mb-8">
             <div>
@@ -53,6 +53,4 @@ const Footer = () => {
             </div>
         </div>
     );
-};
-
-export default Footer;
+}

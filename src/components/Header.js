@@ -14,16 +14,16 @@ export default function Header(props) {
                     alt="#100DaysOfCloud Logo"
                 />
                 <div className="flex items-center">
-                    <Link to="journeyers" className="ml-10 text-xl">
+                    <Link to="/journeyers" className="ml-10 text-xl">
                         Journeyers
                     </Link>
-                    <Link to="blog" className="ml-10 text-xl">
+                    <Link to="/blog" className="ml-10 text-xl">
                         Blog
                     </Link>
-                    <Link to="rules" className="ml-10 text-xl">
+                    <Link to="/rules" className="ml-10 text-xl">
                         Rules
                     </Link>
-                    <Link to="faqs" className="ml-10 text-xl">
+                    <Link to="/faqs" className="ml-10 text-xl">
                         FAQs
                     </Link>
                     {loggedIn ? (

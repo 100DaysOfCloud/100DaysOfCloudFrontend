@@ -29,5 +29,9 @@ html {
   @apply max-w-full flex justify-center items-center;
 }
 
+li {
+  @apply ml-24 text-base list-disc;
+}
+
 
 @tailwind utilities;

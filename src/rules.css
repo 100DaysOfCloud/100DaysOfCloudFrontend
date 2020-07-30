@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.rules{
+  @apply ml-12 text-base font-sans;
+}
+
+.rules h2,h3,h4,h5{
+  @apply mt-2 mb-2 font-extrabold;
+}
+
+.rules h1{
+  @apply text-3xl mt-3 mb-3; 
+}
+
+.rules h2{
+  @apply text-2xl;
+}
+.rules h3{
+  @apply text-lg;
+}
+
+.rules h4{
+@apply text-base;
+}
+
+.rules h5{ 
+@apply text-sm;
+}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 
-export default function AccountDropdown(props) {
+export default function AccountDropdown() {
     const [clicked, setClicked] = useState(false);
 
     // Handles clicking on the profile image
-    function handleClick(previousClicked) {
-        setClicked(!previousClicked);
+    function handleClick() {
+        setClicked((previousClicked) => !previousClicked);
     }
 
     // Handles clicking anywhere outside of the dropdown menu to close it

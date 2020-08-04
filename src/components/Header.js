@@ -17,6 +17,9 @@ export default function Header(props) {
                     <Link to="/journeyers" className="ml-10 text-xl">
                         Journeyers
                     </Link>
+                    <Link to="/leaderboard" className="ml-10 text-xl">
+                        Leaderboard
+                    </Link>
                     <Link to="/blog" className="ml-10 text-xl">
                         Blog
                     </Link>

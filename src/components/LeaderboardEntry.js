@@ -4,19 +4,22 @@ import { ProfileImage } from './ProfileBadge/ProfileComponents';
 
 import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-export default function LeaderboardEntry({
-    index,
-    name,
-    githubProfile,
-    githubScore,
-    githubStreak,
-    twitterProfile,
-    twitterScore,
-    twitterStreak,
-    linkedinProfile,
-    avatarImage,
-}) {
+export default function LeaderboardEntry(props) {
     const [tooltipShown, setTooltipShown] = useState(false);
+
+    const {
+        name,
+        githubProfile,
+        githubScore,
+        githubStreak,
+        twitterProfile,
+        twitterScore,
+        twitterStreak,
+        linkedinProfile,
+        avatarImage,
+    } = props.user;
+
+    const index = props.index;
 
     const totalScore = githubScore + twitterScore;
 

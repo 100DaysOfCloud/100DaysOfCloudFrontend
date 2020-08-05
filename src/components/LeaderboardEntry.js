@@ -63,6 +63,7 @@ export default function LeaderboardEntry({
                     <div className="mx-auto">{twitterStreak}</div>
                     <div className="mx-auto">
                         <div
+                            role="presentation"
                             onMouseEnter={() => setTooltipShown(true)}
                             onMouseLeave={() => setTooltipShown(false)}
                         >

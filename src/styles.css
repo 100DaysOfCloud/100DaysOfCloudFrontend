@@ -25,5 +25,13 @@ html {
   @apply flex-grow
 }
 
+.article-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.article-content .content {
+  max-width: 80%;
+}
 
 @tailwind utilities;

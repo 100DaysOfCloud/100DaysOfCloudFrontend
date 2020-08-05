@@ -19,7 +19,7 @@ export default function Home() {
                         <div className="col-span-2">
                             <ArticleThumbnail provider="medium" />
                         </div>
-                        <div className="col-span-5">
+                        <div className="col-span-5 ">
                             <FeaturedArticle />
                             <NewsCarousel category="AWS" />
                             <NewsCarousel category="Azure" />

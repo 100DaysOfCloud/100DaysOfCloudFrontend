@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { FaTwitter, FaDiscord, FaGithub, FaLinkedin } from 'react-icons/fa';
+import logo from '../assets/banner.png';
 
 const Footer = () => {
     return (
@@ -8,7 +9,7 @@ const Footer = () => {
             <div>
                 <img
                     className="f-32"
-                    src="./banner.png"
+                    src={logo}
                     alt="#100DaysOfCloud Logo"
                 />
             </div>

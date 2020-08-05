@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import AccountDropdown from './AccountDropdown';
+import logo from '../assets/banner.png';
 
 export default class Header extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class Header extends Component {
                 <div className="flex items-center justify-between">
                     <img
                         className="h-32"
-                        src="./banner.png"
+                        src={logo}
                         alt="#100DaysOfCloud Logo"
                     />
                     <div className="flex items-center">

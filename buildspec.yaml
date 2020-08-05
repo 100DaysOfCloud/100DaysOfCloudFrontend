@@ -15,8 +15,8 @@ phases:
     post_build:        
         commands:            
             - 'aws s3 sync "public/" "s3://$PUBLIC_OUTPUT_BUCKET" --delete --acl "public-read"
-artifacts:    
-    base-directory: public    
-    files:        
-        - '**/*'    
-    discard-paths: yes
+#artifacts:    
+#    base-directory: public    
+#    files:        
+#        - '**/*'    
+#    discard-paths: yes

@@ -1,22 +1,26 @@
-version: 0.1
-phases:    
-    install:
-        #runtime-versions:
-        #  nodejs: 12.x
-        commands:            
-            - 'touch .npmignore'            
-            - 'npm install -g gatsby'    
-    pre_build:        
-        commands:            
-            - 'npm install'    
-    build:        
-        commands:            
-            - 'npm run build'    
-    post_build:        
-        commands:            
-            - 'aws s3 sync "public/" "s3://$PUBLIC_OUTPUT_BUCKET" --delete --acl "public-read"
-#artifacts:    
-#    base-directory: public    
-#    files:        
-#        - '**/*'    
-#    discard-paths: yes
+ version: 0.2
+
+ phases:
+  install:
+    runtime-versions:
+        nodejs: 10
+    commands:
+      - echo Installing Gatsby-CLI...
+      #- npm install -g gatsby
+      - npm install -g gatsby-cli
+  pre_build:
+    commands:
+      - echo Installing Node packages...
+      - npm install
+  build:
+    commands:
+      - echo Build initiated...
+      - npm run build
+  post_build:
+    commands:
+      - echo Synchronizing public directory...
+      - aws s3 sync ./public/ s3://$PUBLIC_OUTPUT_BUCKET --delete
+ artifacts:
+  base-directory: public
+  files:
+    - '**/*'

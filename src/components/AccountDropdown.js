@@ -42,7 +42,6 @@ export default function AccountDropdown() {
                 />
             </button>
             <button
-                role="button"
                 onClick={handleClose}
                 className={
                     clicked
@@ -50,6 +49,7 @@ export default function AccountDropdown() {
                         : 'hidden '
                 }
                 tabindex="-1"
+                aria-label="Exit dropdown menu"
             />
             <div
                 className={

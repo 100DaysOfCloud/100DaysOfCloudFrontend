@@ -12,8 +12,8 @@ phases:
             - 'npm run build'    
     post_build:        
         commands:            
-            - 'aws s3 sync "public/" "s3://100daysofcloud" --delete --acl "public-read"
-'artifacts:    
+            - 'aws s3 sync "public/" "s3://$PUBLIC_OUTPUT_BUCKET" --delete --acl "public-read"
+artifacts:    
     base-directory: public    
     files:        
         - '**/*'    

@@ -1,0 +1,20 @@
+version: 0.1
+phases:    
+    install:        
+        commands:            
+            - 'touch .npmignore'            
+            - 'npm install -g gatsby'    
+    pre_build:        
+        commands:            
+            - 'npm install'    
+    build:        
+        commands:            
+            - 'npm run build'    
+    post_build:        
+        commands:            
+            - 'aws s3 sync "public/" "s3://100daysofcloud" --delete --acl "public-read"
+'artifacts:    
+    base-directory: public    
+    files:        
+        - '**/*'    
+    discard-paths: yes

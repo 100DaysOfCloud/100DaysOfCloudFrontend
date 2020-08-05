@@ -42,6 +42,7 @@ export default function AccountDropdown() {
                 />
             </button>
             <button
+                role="button"
                 onClick={handleClose}
                 className={
                     clicked

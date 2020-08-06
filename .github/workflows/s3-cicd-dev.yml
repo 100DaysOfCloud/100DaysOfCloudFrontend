@@ -24,8 +24,10 @@ jobs:
         - name: Install Gatsby
           run: npm install -g gatsby-cli
 
-        - name: Build static site
+        - name: Install npm packages
           run: npm install
+          
+        - name: Build static site
           run: gatsby build
 
         - name: Deploy static site to S3 bucket

@@ -7,7 +7,7 @@ const NameAndHandle = (props) => {
     if (props.size === 'small') {
         nameImagePadding = '4';
     }
-    
+
     if (props.contactDirection === 'right') {
         textMargin = 'ml-';
     }
@@ -38,7 +38,11 @@ const ProfileImage = (props) => {
                 imageSize
             }
         >
-            <img src={props.avatar} alt="" className="h-full w-full" />
+            <img
+                src={props.avatar}
+                alt={`This is ${props.name}!`}
+                className="h-full w-full"
+            />
         </div>
     );
 };

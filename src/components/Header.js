@@ -8,14 +8,19 @@ export default function Header(props) {
     return (
         <div className="pt-10 max-w-8xl m-auto">
             <div className="flex items-center justify-between">
-                <img
-                    className="h-32"
-                    src="./banner.png"
-                    alt="#100DaysOfCloud Logo"
-                />
+                <Link to="/">
+                    <img
+                        className="h-32"
+                        src="./banner.png"
+                        alt="#100DaysOfCloud Logo"
+                    />
+                </Link>
                 <div className="flex items-center">
                     <Link to="/journeyers" className="ml-10 text-xl">
                         Journeyers
+                    </Link>
+                    <Link to="/leaderboard" className="ml-10 text-xl">
+                        Leaderboard
                     </Link>
                     <Link to="/blog" className="ml-10 text-xl">
                         Blog

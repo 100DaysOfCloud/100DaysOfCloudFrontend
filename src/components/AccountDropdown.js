@@ -49,6 +49,7 @@ export default function AccountDropdown() {
                         : 'hidden '
                 }
                 tabindex="-1"
+                aria-label="Exit dropdown menu"
             />
             <div
                 className={

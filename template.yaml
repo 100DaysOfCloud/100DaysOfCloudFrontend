@@ -1,0 +1,292 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+# Transform: AWS::Serverless-2016-10-31
+Description: >
+  The frontend infrastructure of the 100DaysOfCloud website.
+
+########     ###    ########     ###    ##     ##  ######  
+##     ##   ## ##   ##     ##   ## ##   ###   ### ##    ## 
+##     ##  ##   ##  ##     ##  ##   ##  #### #### ##       
+########  ##     ## ########  ##     ## ## ### ##  ######  
+##        ######### ##   ##   ######### ##     ##       ## 
+##        ##     ## ##    ##  ##     ## ##     ## ##    ## 
+##        ##     ## ##     ## ##     ## ##     ##  ######  
+
+Parameters:
+  AppName:
+    Description: "The name of the project. It will be used to name and tag resources"
+    Type: String
+    Default: "100DaysOfCloudWebsite"
+
+  Stage:
+    Description: "The stage this template is used for. prod, staging, dev"
+    Type: String
+    Default: "dev"
+
+  GithubRepo:
+    Description: "The Gitub repository's full URL, ending in .git!"
+    Type: String
+    Default: "https://github.com/100DaysOfCloud/100DaysOfCloudFrontend.git"
+
+  GitHubBranch:
+    Description: "The branch of the GitHub repo"
+    Type: String
+    Default: "dev"
+
+  GithubToken:
+    Description: Github OAuth Token with full permissions on admin:repo_hook and repo
+    Type: AWS::SSM::Parameter::Value<String>
+    #NoEcho: true
+    Default: /100DaysOfCloud/Frontend/GithubTokenS
+
+
+ #######  ##     ## ######## ########  ##     ## ########  ######  
+##     ## ##     ##    ##    ##     ## ##     ##    ##    ##    ## 
+##     ## ##     ##    ##    ##     ## ##     ##    ##    ##       
+##     ## ##     ##    ##    ########  ##     ##    ##     ######  
+##     ## ##     ##    ##    ##        ##     ##    ##          ## 
+##     ## ##     ##    ##    ##        ##     ##    ##    ##    ## 
+ #######   #######     ##    ##         #######     ##     ######  
+
+Outputs:
+  CloudFrontURL:
+    Description: The URL of the frontend CloudFront distribution
+    Value: !Sub https://${WebsiteCloudFrontDistribution.DomainName}
+
+
+Resources:
+
+##      ## ######## ########   ######  #### ######## ######## 
+##  ##  ## ##       ##     ## ##    ##  ##     ##    ##       
+##  ##  ## ##       ##     ## ##        ##     ##    ##       
+##  ##  ## ######   ########   ######   ##     ##    ######   
+##  ##  ## ##       ##     ##       ##  ##     ##    ##       
+##  ##  ## ##       ##     ## ##    ##  ##     ##    ##       
+ ###  ###  ######## ########   ######  ####    ##    ######## 
+ 
+  ## Static site hosting bucket
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      CorsConfiguration:
+        CorsRules:
+          - 
+            AllowedMethods: 
+              - GET
+              - HEAD
+            AllowedOrigins: 
+              - "*"
+            AllowedHeaders: 
+              - "*"
+      Tags: 
+        - 
+          Key: Stack
+          Value: !Ref AWS::StackName
+        -
+          Key: CostCenter
+          Value: !Ref AppName
+        - 
+          Key: Stage
+          Value: !Ref Stage
+
+  ## CloudFront OAI for the website bucket policy
+  CloudFrontOAI:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties: 
+      CloudFrontOriginAccessIdentityConfig: 
+        Comment: !Sub "The OAI for the ${AppName} project and bucket: ${WebsiteBucket}"
+
+
+  ## Bucket policy of the static website hosting bucket
+  WebsiteBucketBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Id: PublicAccessPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal:
+              CanonicalUser: !GetAtt CloudFrontOAI.S3CanonicalUserId
+            Action: 's3:GetObject'
+            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
+
+  ## Cloudfront distribution
+  WebsiteCloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+        - DomainName: !Sub "${WebsiteBucket}.s3.amazonaws.com"
+          Id: myS3Origin
+          S3OriginConfig:
+            OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
+        Enabled: True
+        Comment: !Sub "${AppName} distribution"
+        DefaultRootObject: index.html
+        # FIXME when domain switching
+        # Aliases:
+        #   - !Ref WebsiteDomainName
+        #   - !Sub "www.${WebsiteDomainName}"
+        DefaultCacheBehavior:
+          DefaultTTL: 1800
+          MaxTTL: 14400
+          Compress: True
+          AllowedMethods:
+            - HEAD
+            - GET
+            - OPTIONS
+          CachedMethods:
+            - HEAD
+            - GET
+            - OPTIONS
+          TargetOriginId: myS3Origin
+          ForwardedValues:
+            QueryString: 'false'
+          ViewerProtocolPolicy: redirect-to-https
+        PriceClass: PriceClass_200
+        # FIXME when domain switching
+        # ViewerCertificate:
+        #   AcmCertificateArn: !Ref DomainCertificate
+        #   SslSupportMethod: sni-only 
+      Tags: 
+        - 
+          Key: Stack
+          Value: !Ref AWS::StackName
+        -
+          Key: CostCenter
+          Value: !Ref AppName
+        - 
+          Key: Stage
+          Value: !Ref Stage
+
+ ######  ####       ##  ######  ########  
+##    ##  ##       ##  ##    ## ##     ## 
+##        ##      ##   ##       ##     ## 
+##        ##     ##    ##       ##     ## 
+##        ##    ##     ##       ##     ## 
+##    ##  ##   ##      ##    ## ##     ## 
+ ######  #### ##        ######  ######## 
+
+
+  #####  #    # # #      ##### 
+  #    # #    # # #      #    #
+  #####  #    # # #      #    #
+  #    # #    # # #      #    #
+  #    # #    # # #      #    #
+  #####   ####  # ###### ##### 
+
+  GitHubFrontendCodeBuildSourceCreds:
+    Type: AWS::CodeBuild::SourceCredential
+    Properties:
+      Token: '{{resolve:secretsmanager:hdoc/frontend:SecretString:token}}'
+      ServerType: GITHUB
+      AuthType: PERSONAL_ACCESS_TOKEN
+
+  GitHubFrontendCodeBuild:
+    Type: AWS::CodeBuild::Project
+    DependsOn: GitHubFrontendCodeBuildSourceCreds
+    Properties:
+      Description: !Sub Pulls ${AppName} repo from GitHub and executes its buildspec.yaml
+      ServiceRole: !GetAtt CodeBuildServiceRole.Arn
+      Artifacts:
+        Type: NO_ARTIFACTS
+      BadgeEnabled: True
+      Environment: 
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:3.0 # More info on Images: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
+        EnvironmentVariables:
+            -
+              Name: PUBLIC_OUTPUT_BUCKET
+              Value: !Ref WebsiteBucket
+      Source:
+        Type: GITHUB
+        ReportBuildStatus: True
+        Location: !Ref GithubRepo
+        BuildSpec: buildspec.yaml
+      SourceVersion: !Ref GitHubBranch
+      TimeoutInMinutes: 10
+      ### FIXME still getting OAuthProviderException errors for the webhooks
+      # Triggers:
+      #   Webhook: True
+      #   FilterGroups:
+      #     - - Type: EVENT
+      #         Pattern: "PUSH"
+      #         ExcludeMatchedPattern: False
+      #       - Type: HEAD_REF
+      #         Pattern: !Sub refs/heads/${Stage}
+      #         ExcludeMatchedPattern: False
+      Tags: 
+        - 
+          Key: Stack
+          Value: !Ref AWS::StackName
+        -
+          Key: CostCenter
+          Value: !Ref AppName
+        - 
+          Key: Stage
+          Value: !Ref Stage
+      
+
+  #   ##   #    # 
+  #  #  #  ##  ## 
+  # #    # # ## # 
+  # ###### #    # 
+  # #    # #    # 
+  # #    # #    # 
+
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+        AssumeRolePolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action: 
+                  - 'sts:AssumeRole'
+                Effect: Allow
+                Principal:
+                  Service:
+                    - codebuild.amazonaws.com
+        Path: /
+        Policies:
+            - PolicyName: CodeBuildLogs
+              PolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                  - 
+                    Effect: Allow
+                    Action:
+                      - 'logs:CreateLogGroup'
+                      - 'logs:CreateLogStream'
+                      - 'logs:PutLogEvents'
+                    Resource:
+                      - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/GitHubFrontendCodeBuild-*'
+                      - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/GitHubFrontendCodeBuild-*:*'
+            - PolicyName: DeployToWebsiteBucket
+              PolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                  - 
+                    Effect: Allow
+                    Action: 
+                      - 's3:GetObject'
+                      - 's3:GetObjectVersion'
+                      - 's3:PutObject'
+                      - 's3:ListBucket'
+                    Resource:
+                      - !Sub 'arn:aws:s3:::${WebsiteBucket}/*'
+                      - !Sub 'arn:aws:s3:::${WebsiteBucket}'
+            - PolicyName: CodeBuildParameterStore
+              PolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                  -
+                    Effect: Allow
+                    Action: 'ssm:GetParameters'
+                    Resource: 
+                      - !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${GithubToken}'

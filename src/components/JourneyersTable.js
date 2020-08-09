@@ -102,7 +102,7 @@ const JTable = (props) => {
                 <tbody className="bg-white divide-y divide-gray-200 text-center">
                     {entries.map((user) => (
                         <tr key={user.full_name}>
-                            <td className="text-left">
+                            <td>
                                 <ProfileBadge
                                     name={user.full_name}
                                     handle=""
@@ -115,21 +115,13 @@ const JTable = (props) => {
                             </td>
                             <td>
                                 <Link
-                                    to={
-                                        'https://github.com/' +
-                                        user.github_username
-                                    }
-                                >
+                                    to={'https://github.com/' +  user.github_username } >
                                     {user.github_username}
                                 </Link>
                             </td>
                             <td>
                                 <Link
-                                    to={
-                                        'https://twitter.com/' +
-                                        user.twitter_username
-                                    }
-                                >
+                                    to={ 'https://twitter.com/' + user.twitter_username } >
                                     @{user.twitter_username}
                                 </Link>
                             </td>

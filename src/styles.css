@@ -35,10 +35,7 @@ li {
 
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  @apply flex justify-center items-center min-h-screen;
 }
 
 
@@ -46,12 +43,9 @@ li {
   @apply px-6 py-3 border-b border-gray-200 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
 }
 
-.show-more{
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
+.show-more{
+  @apply flex items-center justify-center;
 }
 
 

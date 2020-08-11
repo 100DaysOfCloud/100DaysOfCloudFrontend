@@ -8,7 +8,8 @@ const ProfileContent = (props, contactDirection) => {
     let cardSize = 'max-w-lg';
 	let cardClass;
 	let cardPadding = "p-4";
-	let cardShadow = "shadow";
+    let cardShadow = "shadow";
+    let cardJustifyContent = "justify-center";
 
     if (typeof props['size'!='undefined']){
         if (props.size === 'small') {
@@ -30,12 +31,19 @@ const ProfileContent = (props, contactDirection) => {
         if (props.shadow==='false'){
 			cardShadow = "";
 		}
-	}
+    }
+    
+    if (typeof props['justify'] != 'undefined') {
+        if (props.justify==='left'){
+			cardJustifyContent = "justify-left";
+        }
+    }
+
 
 
 	
     cardClass =
-        'flex flex-shrink items-center justify-center rounded-lg w-full '+cardPadding+' '+cardShadow+' '+cardSize;
+        'flex flex-shrink items-center rounded-lg w-full '+cardJustifyContent+' '+cardPadding+' '+cardShadow+' '+cardSize;
 
     if (contactDirection === 'left') {
         return (

@@ -111,6 +111,7 @@ const JTable = (props) => {
                                     size="small"
                                     shadow="false"
                                     padding="false"
+                                    justify="left"
                                 />
                             </td>
                             <td>

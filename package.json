@@ -12,6 +12,10 @@
     "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-icons": "^3.10.0",
+    "react-slick": "^0.27.8",
+    "react-tooltip": "^4.2.8",
+    "slick-carousel": "^1.8.1",
     "tailwindcss": "^1.6.2"
   }
 }

@@ -2,14 +2,14 @@ import React from 'react';
 
 import { FaMedium, FaDev, FaLinkedin } from 'react-icons/fa';
 
-export default function ArticleThumbnail(props) {
+export default function ArticleThumbnail({ title, subtitle, image, provider }) {
     const components = {
         medium: FaMedium,
         dev: FaDev,
         linkedin: FaLinkedin,
     };
 
-    const Provider = components[props.provider];
+    const Provider = components[provider];
 
     return (
         <div>
@@ -20,14 +20,14 @@ export default function ArticleThumbnail(props) {
                 <div className='w-full pt-16x9 relative overflow-hidden'>
                     <img
                         className='h-full w-full object-cover object-center absolute inset-0'
-                        src='https://source.unsplash.com/random/'
+                        src={image}
                         alt='Article'
                     />
                 </div>
             </div>
             <div>
-                <p className='text-2xl text-bold'>An article title</p>
-                <p className='text-xl'>An article subtitle</p>
+                <p className='text-2xl text-bold'>{title}</p>
+                <p className='text-xl'>{subtitle}</p>
             </div>
         </div>
     );

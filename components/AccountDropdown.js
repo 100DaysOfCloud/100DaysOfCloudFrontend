@@ -30,7 +30,7 @@ export default function AccountDropdown() {
         <div className='relative'>
             <button
                 className={
-                    'relative z-10 block h-16 w-16 rounded-full overflow-hidden border-2 focus:outline-none' +
+                    'relative z-1 block h-16 w-16 rounded-full overflow-hidden border-2 focus:outline-none' +
                     (clicked ? ' focus:border-gray-500' : '')
                 }
                 onClick={handleClick}>
@@ -47,7 +47,7 @@ export default function AccountDropdown() {
                         ? 'fixed inset-0 h-full w-full cursor-default focus:outline-0'
                         : 'hidden '
                 }
-                tabindex='-1'
+                tabIndex='-1'
                 aria-label='Exit dropdown menu'
             />
             <div
@@ -55,21 +55,21 @@ export default function AccountDropdown() {
                     (clicked ? 'block ' : 'hidden ') +
                     'bg-gray-200 w-48 py-2 mt-4 rounded-lg shadow-xl absolute right-0'
                 }>
-                <p
+                <Link
                     href='/settings'
                     className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
                     Account setting
-                </p>
-                <p
+                </Link>
+                <Link
                     href='/submit'
                     className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
                     Submit an article
-                </p>
-                <p
+                </Link>
+                <Link
                     href='/log-out'
                     className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
                     Log out
-                </p>
+                </Link>
             </div>
         </div>
     );

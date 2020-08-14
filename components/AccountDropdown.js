@@ -53,22 +53,22 @@ export default function AccountDropdown() {
             <div
                 className={
                     (clicked ? 'block ' : 'hidden ') +
-                    'bg-gray-200 w-48 py-2 mt-4 rounded-lg shadow-xl absolute right-0'
+                    'bg-gray-200 w-48 py-2 mt-4 rounded-lg shadow-xl absolute right-0 flex flex-col'
                 }>
-                <Link
-                    href='/settings'
-                    className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
-                    Account setting
+                <Link href='/settings'>
+                    <div className='dropdown-entry hover:bg-gray-400'>
+                        Account setting
+                    </div>
                 </Link>
-                <Link
-                    href='/submit'
-                    className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
-                    Submit an article
+                <Link href='/submit'>
+                    <div className='dropdown-entry hover:bg-gray-400'>
+                        Submit an article
+                    </div>
                 </Link>
-                <Link
-                    href='/log-out'
-                    className='block px-4 py-2 text-gray-800 hover:bg-gray-400'>
-                    Log out
+                <Link href='/log-out'>
+                    <div className='dropdown-entry hover:bg-gray-400'>
+                        Log out
+                    </div>
                 </Link>
             </div>
         </div>

@@ -7,4 +7,8 @@
     @apply text-2xl font-bold border-b-2 border-gray-900 mb-4;
 }
 
+.dropdown-entry {
+    @apply block px-4 py-2 text-gray-800;
+}
+
 @tailwind utilities;

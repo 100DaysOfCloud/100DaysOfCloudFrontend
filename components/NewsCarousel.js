@@ -26,15 +26,15 @@ export default function NewsCarousel(props) {
         centerMode: true,
     };
 
+    const SLIDES = 5;
+
     const { data, error } = useSWR(
-        () => `/api/articles/${props.category}`,
+        () => `/api/articles/${props.category}/${SLIDES}`,
         fetcher
     );
 
     if (error) return <div>{error.message}</div>;
     if (!data) return <div>Loading...</div>;
-
-    console.log(data);
 
     return (
         <div className='pb-8'>

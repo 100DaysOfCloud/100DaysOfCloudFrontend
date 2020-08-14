@@ -36,11 +36,11 @@ export default function Header(props) {
                             FAQs
                         </span>
                     </Link>
-                    <Link href='/blog'>
+                    <a href='https://blog.100daysofcloud.com' target='#'>
                         <span className='ml-10 text-xl cursor-default hover:underline'>
                             Blog
                         </span>
-                    </Link>
+                    </a>
                     {loggedIn ? (
                         <span className='ml-10'>
                             <AccountDropdown />

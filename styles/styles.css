@@ -3,4 +3,8 @@
 @tailwind components;
 /* purgecss end ignore */
 
+.section-title {
+    @apply text-2xl font-bold border-b-2 border-gray-900 mb-4;
+}
+
 @tailwind utilities;

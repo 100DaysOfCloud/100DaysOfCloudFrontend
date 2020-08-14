@@ -28,7 +28,7 @@ export default function Home() {
                         <FeaturedArticle />
                         <NewsCarousel category='AWS' />
                         <NewsCarousel category='Azure' />
-                        <NewsCarousel category='Google Cloud' />
+                        <NewsCarousel category='GCP' />
                     </div>
                     <div className='col-span-3'>
                         <HomeLeaderboard />

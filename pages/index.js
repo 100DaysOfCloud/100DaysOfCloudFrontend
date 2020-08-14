@@ -7,6 +7,7 @@ import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleThumbnail from '../components/ArticleThumbnail';
 import NewsCarousel from '../components/NewsCarousel';
 import Footer from '../components/Footer';
+import HomeLeaderboard from '../components/HomeLeaderboard';
 
 export default function Home() {
     return (
@@ -18,25 +19,23 @@ export default function Home() {
 
             <Header />
 
-            <div className='site'>
-                <div className='site-content'>
-                    <div className='grid grid-cols-10 gap-8'>
-                        <div className='col-span-2'>
-                            <ArticleThumbnail provider='medium' />
-                        </div>
-                        <div className='col-span-5'>
-                            <FeaturedArticle />
-                            <NewsCarousel category='AWS' />
-                            <NewsCarousel category='Azure' />
-                            <NewsCarousel category='Google Cloud' />
-                        </div>
-                        <div className='col-span-3'>
-                            <ArticleThumbnail provider='dev' />
-                        </div>
+            <main>
+                <div className='grid grid-cols-10 gap-8'>
+                    <div className='col-span-2'>
+                        <div className='section-title'>Tags</div>
+                    </div>
+                    <div className='col-span-5'>
+                        <FeaturedArticle />
+                        <NewsCarousel category='AWS' />
+                        <NewsCarousel category='Azure' />
+                        <NewsCarousel category='Google Cloud' />
+                    </div>
+                    <div className='col-span-3'>
+                        <HomeLeaderboard />
                     </div>
                 </div>
-                <Footer />
-            </div>
+            </main>
+            <Footer />
         </div>
     );
 }

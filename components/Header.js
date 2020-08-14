@@ -10,7 +10,7 @@ export default function Header(props) {
             <div className='flex items-center justify-between'>
                 <Link href='/'>
                     <img
-                        className='h-32'
+                        className='h-32 cursor-pointer'
                         src='/banner.png'
                         alt='#100DaysOfCloud Logo'
                     />

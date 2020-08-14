@@ -10,15 +10,13 @@ export default function NewsCarousel(props) {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         centerMode: true,
     };
 
     return (
         <div className='pb-8'>
-            <h2 className='text-2xl font-bold border-b-2 border-gray-900 mb-4'>
-                {props.category}
-            </h2>
+            <h2 className='section-title'>{props.category}</h2>
             <Slider {...settings}>
                 <ArticleThumbnail provider='medium' />
                 <ArticleThumbnail provider='dev' />

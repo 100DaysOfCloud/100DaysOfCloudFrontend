@@ -25,7 +25,7 @@ export default function Tags(props) {
             {data.map((item, index) => (
                 <div key={item.tag}>
                     <Link href={`/articles/${item.tag}`}>
-                        {`${item.tag} (${item.count})`}
+                        <span className='hover:underline cursor-default'>{`${item.tag} (${item.count})`}</span>
                     </Link>
                 </div>
             ))}

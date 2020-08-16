@@ -2,52 +2,79 @@
 @tailwind components;
 
 .contact-icon {
-  @apply w-4 h-4 mx-2;
+    @apply w-4 h-4 mx-2;
 }
 
 .section-header {
-  @apply text-2xl text-blue-700 tracking-widest py-2 pr-5 border-b-2 border-blue-200 w-40;
+    @apply text-2xl text-blue-700 tracking-widest py-2 pr-5 border-b-2 border-blue-200 w-40;
 }
 
 html {
-  background: #fcfcfc;
+    background: #fcfcfc;
 }
 
-.f-32{
-  @apply w-1/3 h-auto block ml-auto mr-auto;
+.f-32 {
+    @apply w-1/3 h-auto block ml-auto mr-auto;
 }
 
-.site{
-  @apply flex min-h-screen flex-col;
+.site {
+    @apply flex min-h-screen flex-col;
 }
 
-.site-content{
-  @apply flex-grow;
+.site-content {
+    @apply flex-grow;
 }
 
 .profile-container {
-  @apply max-w-full flex justify-center items-center;
+    @apply max-w-full flex justify-center items-center;
 }
 
 li {
-  @apply ml-24 text-base list-disc;
+    @apply ml-24 text-base list-disc;
 }
-
 
 .container {
-  @apply flex justify-center items-center min-h-screen;
+    @apply flex justify-center items-center min-h-screen;
 }
 
 
-.jtable-header{
-  @apply px-6 py-3 border-b border-gray-200 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
+/*
+Journeyers Table
+*/
+
+@media (min-width: 640px) {
+    table {
+        display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+        display: none;
+    }
 }
 
+@media (max-width: 640px) {
+    table {
+        @apply m-1;
+    }
 
-.show-more{
-  @apply flex items-center justify-center;
+    #badge {
+        height: 106px !important;
+    }
+    #table-field {
+        height: 55px !important;
+    }
 }
 
+td:not(:last-child) {
+    border-bottom: 0;
+}
 
+th:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.show-more {
+    @apply flex items-center justify-center;
+}
 
 @tailwind utilities;

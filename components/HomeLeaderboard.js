@@ -24,7 +24,7 @@ export default function HomeLeaderboard(props) {
     if (!data) return <div>Loading...</div>;
 
     return (
-        <div>
+        <div className='mb-10'>
             <div className='section-title'>Leaderboard</div>
             <div className='grid grid-cols-6 font-bold'>
                 <div className='col-span-5' />

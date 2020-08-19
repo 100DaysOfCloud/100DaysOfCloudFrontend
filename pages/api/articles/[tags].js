@@ -3,7 +3,10 @@ import { articles } from '../../../data/articles.json';
 import _ from 'lodash';
 
 export default function returnFilteredArticles(req, res) {
-    // Catch all possible routes
+    const { limit } = req.query;
+
+    const number = limit ? limit : undefined;
+
     const tags = _(articles)
         .countBy('tags')
         .map(function (count, tag) {
@@ -13,7 +16,7 @@ export default function returnFilteredArticles(req, res) {
             };
         })
         .orderBy('count', 'desc')
-        .slice(0, 20);
+        .slice(0, number);
 
     res.status(200).json(tags);
 }

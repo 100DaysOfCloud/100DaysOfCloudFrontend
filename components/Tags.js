@@ -13,8 +13,13 @@ const fetcher = async (url) => {
     return data;
 };
 
-export default function Tags(props) {
-    const { data, error } = useSWR(() => `/api/articles/tags`, fetcher);
+export default function Tags() {
+    const LIMIT = 20;
+
+    const { data, error } = useSWR(
+        () => `/api/articles/tags?limit=${LIMIT}`,
+        fetcher
+    );
 
     if (error) return <div>{error.message}</div>;
     if (!data) return <div>Loading...</div>;

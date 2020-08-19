@@ -29,7 +29,7 @@ export default function NewsCarousel(props) {
     const SLIDES = 5;
 
     const { data, error } = useSWR(
-        () => `/api/articles/${props.category}/${SLIDES}`,
+        () => `/api/articles/${props.category}/?limit=${SLIDES}`,
         fetcher
     );
 

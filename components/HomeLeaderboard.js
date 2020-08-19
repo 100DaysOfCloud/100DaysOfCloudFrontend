@@ -13,7 +13,12 @@ const fetcher = async (url) => {
 };
 
 export default function HomeLeaderboard(props) {
-    const { data, error } = useSWR(() => `/api/leaderboard/5`, fetcher);
+    const ENTRIES = 5;
+
+    const { data, error } = useSWR(
+        () => `/api/leaderboard?limit=${ENTRIES}`,
+        fetcher
+    );
 
     if (error) return <div>{error.message}</div>;
     if (!data) return <div>Loading...</div>;

@@ -1,36 +1,33 @@
 import React from 'react';
 
 import { ProfileImage } from './subcomponents/ProfileComponents';
-import LeaderboardScores from './subcomponents/LeaderboardScores';
+import ReactTooltip from 'react-tooltip';
 
 export default function LeaderboardEntry(props) {
-    const {
-        name,
-        githubScore,
-        githubStreak,
-        twitterScore,
-        twitterStreak,
-        avatarImage,
-    } = props.user;
+    const { name, githubScore, twitterScore, avatarImage } = props.user;
 
-    const scores = {
-        githubScore,
-        githubStreak,
-        twitterScore,
-        twitterStreak,
-    };
+    const totalScore = githubScore + twitterScore;
 
     const index = props.index;
 
     return (
-        <div className='grid grid-cols-6 items-center justify-center relative text-2xl'>
+        <div className='grid grid-cols-6 items-center justify-center text-2xl mx'>
             <div className='col-span-1'>#{index + 1}</div>
             <div className='mx-auto col-span-1'>
                 <ProfileImage avatar={avatarImage} name={name} size='small' />
             </div>
-            <div className='mx-auto text-lg col-span-2'>{name}</div>
-            <div className='col-span-2'>
-                <LeaderboardScores name={name} scores={scores} />
+            <div className='mx-auto text-lg col-span-3'>{name}</div>
+            <div className='col-span-1 text-center'>
+                <span data-tip data-for={name}>
+                    {totalScore}
+                </span>
+                <ReactTooltip
+                    id={name}
+                    type='info'
+                    className='flex flex-col justify-center text-center'>
+                    <div>GitHub Score: {githubScore}</div>
+                    <div>Twitter Score: {twitterScore}</div>
+                </ReactTooltip>
             </div>
         </div>
     );

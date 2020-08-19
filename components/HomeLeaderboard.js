@@ -27,17 +27,9 @@ export default function HomeLeaderboard(props) {
         <div>
             <div className='section-title'>Leaderboard</div>
             <div className='grid grid-cols-6 font-bold'>
-                <div className='col-span-4' />
-                <div className='grid col-span-2 grid-cols-3'>
-                    <p className='col-span-1 mx-auto text-xs text-center'>
-                        GitHub Streak
-                    </p>
-                    <p className='col-span-1 mx-auto text-xs text-center'>
-                        Twitter Streak
-                    </p>
-                    <p className='col-span-1 mx-auto text-xs text-center'>
-                        Total Score
-                    </p>
+                <div className='col-span-5' />
+                <div className='col-span-1'>
+                    <p className='text-xs text-center'>CloudCoins</p>
                 </div>
             </div>
             {data.map((user, index) => {

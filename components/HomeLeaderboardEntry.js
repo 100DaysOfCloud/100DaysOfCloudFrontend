@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ProfileImage } from './subcomponents/ProfileComponents';
 import LeaderboardScores from './subcomponents/LeaderboardScores';
-
-import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function LeaderboardEntry(props) {
     const {

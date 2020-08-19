@@ -13,7 +13,8 @@ export default function Layout({ children, title }) {
                 </title>
                 <link rel='icon' href='/favicon.png' />
             </Head>
-            <Header />;<div>{children}</div>
+            <Header className='z-10' />
+            <div>{children}</div>
             <Footer />
         </div>
     );

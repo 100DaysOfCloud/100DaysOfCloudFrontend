@@ -8,10 +8,12 @@ export default function Layout({ children, title }) {
     return (
         <div className='w-5/6 m-auto'>
             <Head>
-                <title>{(title ? title + '| ' : '') + '#100DaysOfCloud'}</title>
+                <title>
+                    {(title ? title + ' | ' : '') + '#100DaysOfCloud'}
+                </title>
                 <link rel='icon' href='/favicon.png' />
             </Head>
-            <Header />;<div id='content'>{children}</div>
+            <Header />;<div>{children}</div>
             <Footer />
         </div>
     );

@@ -5,10 +5,15 @@ export default function articlesHandler(req, res) {
 
     const number = limit ? limit : articles.length;
 
+    console.log(tag);
+
     if (tag) {
         res.status(200).json(
             articles
-                .filter((article) => article.tags.toLowerCase() == tag)
+                .filter(
+                    (article) =>
+                        article.tags.toLowerCase() == tag[0].toLowerCase()
+                )
                 .slice(0, number)
         );
     } else {

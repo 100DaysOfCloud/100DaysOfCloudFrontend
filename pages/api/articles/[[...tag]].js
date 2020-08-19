@@ -7,7 +7,9 @@ export default function articlesHandler(req, res) {
 
     if (tag) {
         res.status(200).json(
-            articles.filter((article) => article.tags == tag).slice(0, number)
+            articles
+                .filter((article) => article.tags.toLowerCase() == tag)
+                .slice(0, number)
         );
     } else {
         res.status(200).json(articles.slice(0, number));

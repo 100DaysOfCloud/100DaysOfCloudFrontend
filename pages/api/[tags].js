@@ -1,8 +1,8 @@
-import { articles } from '../../../data/articles.json';
+import { articles } from '../data/articles.json';
 
 import _ from 'lodash';
 
-export default function returnFilteredArticles(req, res) {
+export default function returnTags(req, res) {
     const { limit } = req.query;
 
     const number = limit ? limit : undefined;

@@ -6,6 +6,7 @@ import Tags from '../components/Tags';
 import FeaturedArticle from '../components/FeaturedArticle';
 import NewsCarousel from '../components/NewsCarousel';
 import HomeLeaderboard from '../components/HomeLeaderboard';
+import RecentUsers from '../components/RecentUsers';
 
 export default function Home() {
     return (
@@ -23,6 +24,7 @@ export default function Home() {
                     </div>
                     <div className='col-span-3'>
                         <HomeLeaderboard />
+                        <RecentUsers />
                     </div>
                 </div>
             </Layout>

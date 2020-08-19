@@ -22,7 +22,7 @@ export default function User(props) {
     const { query } = useRouter();
 
     const { data, error } = useSWR(
-        () => query.id && `/api/user/${query.id}`,
+        () => query.id && `/api/users/${query.id}`,
         fetcher
     );
 

@@ -1,19 +1,11 @@
 import { articles } from '../../../data/articles.json';
 
 export default function articlesHandler(req, res) {
-    const {
-        query: { slug },
-    } = req;
-
-    let tag, limit;
-
-    if (slug) {
-        [tag, limit] = slug;
-    }
+    const { tag, limit } = req.query;
 
     const number = limit ? limit : articles.length;
 
-    if (slug && tag) {
+    if (tag) {
         res.status(200).json(
             articles.filter((article) => article.tags == tag).slice(0, number)
         );

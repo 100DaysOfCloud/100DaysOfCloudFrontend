@@ -2,9 +2,7 @@ import { users } from '../../../data/users1.json';
 
 export default function returnSortedUser(req, res) {
     // Catch all possible routes
-    const {
-        query: { n },
-    } = req;
+    const { limit } = req.query;
 
     users.sort(function (a, b) {
         return (
@@ -13,7 +11,7 @@ export default function returnSortedUser(req, res) {
     });
 
     // If there's no slug, default to 10
-    const number = n ? n : 10;
+    const number = limit ? limit : 10;
 
     res.status(200).json(users.slice(0, number));
 }

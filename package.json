@@ -1,22 +1,24 @@
 {
-  "name": "100daysofcloudnext",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@fullhuman/postcss-purgecss": "^2.3.0",
-    "next": "9.5.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-icons": "^3.10.0",
-    "react-slick": "^0.27.8",
-    "react-tooltip": "^4.2.8",
-    "slick-carousel": "^1.8.1",
-    "swr": "^0.3.0",
-    "tailwindcss": "^1.6.2"
-  }
+    "name": "100daysofcloudnext",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@fullhuman/postcss-purgecss": "^2.3.0",
+        "next": "9.5.2",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
+        "react-icons": "^3.10.0",
+        "react-slick": "^0.27.8",
+        "react-tooltip": "^4.2.8",
+        "slick-carousel": "^1.8.1",
+        "swr": "^0.3.0"
+    },
+    "devDependencies": {
+        "tailwindcss": "^1.6.2"
+    }
 }

@@ -53,7 +53,7 @@ export default function AccountDropdown() {
             <div
                 className={
                     (clicked ? 'block ' : 'hidden ') +
-                    'bg-gray-200 w-48 py-2 mt-4 rounded-lg shadow-xl absolute right-0 flex flex-col'
+                    'bg-gray-200 w-48 py-2 mt-4 rounded-lg shadow-md absolute right-0 flex flex-col z-10'
                 }>
                 <Link href='/settings'>
                     <div className='dropdown-entry hover:bg-gray-400'>

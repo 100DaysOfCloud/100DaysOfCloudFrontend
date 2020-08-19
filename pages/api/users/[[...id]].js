@@ -1,4 +1,4 @@
-import { users } from '../../../data/users1.json';
+import { users } from '../../../data/users.json';
 
 export default function returnUser(req, res) {
     const { id, limit } = req.query;

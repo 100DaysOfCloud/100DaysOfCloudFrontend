@@ -1,4 +1,4 @@
-import { users } from '../../../data/users1.json';
+import { users } from '../../../data/users.json';
 
 export default function returnSortedUser(req, res) {
     // Catch all possible routes

@@ -33,9 +33,10 @@ export default function HomeLeaderboard(props) {
                     return (
                         <div className='flex mb-2 items-center'>
                             <ProfileImage
+                                id={user.id}
                                 avatar={user.avatarImage}
                                 name={user.name}
-                                size='small'
+                                size='sm'
                                 key={user.id}
                             />
                             <p className='ml-2'>{user.name}</p>

@@ -4,7 +4,13 @@ import { ProfileImage } from './subcomponents/ProfileComponents';
 import ReactTooltip from 'react-tooltip';
 
 export default function LeaderboardEntry(props) {
-    const { name, githubScore, twitterScore, avatarImage } = props.user;
+    const {
+        name,
+        githubScore,
+        githubProfile,
+        twitterScore,
+        avatarImage,
+    } = props.user;
 
     const totalScore = githubScore + twitterScore;
 
@@ -14,7 +20,12 @@ export default function LeaderboardEntry(props) {
         <div className='grid grid-cols-6 items-center justify-center text-2xl mx'>
             <div className='col-span-1'>#{index + 1}</div>
             <div className='mx-auto col-span-1'>
-                <ProfileImage avatar={avatarImage} name={name} size='small' />
+                <ProfileImage
+                    id={githubProfile}
+                    avatar={avatarImage}
+                    name={name}
+                    size='small'
+                />
             </div>
             <div className='mx-auto text-lg col-span-3'>{name}</div>
             <div className='col-span-1 text-center'>

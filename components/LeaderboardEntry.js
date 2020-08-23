@@ -32,9 +32,10 @@ export default function LeaderboardEntry(props) {
             <div className='col-span-1'>#{index + 1}</div>
             <div className='mx-auto col-span-2'>
                 <ProfileImage
+                    id={githubProfile}
                     avatar={avatarImage}
                     name={name}
-                    size={index === 0 ? '' : 'small'}
+                    size={index === 0 ? 'lg' : 'md'}
                 />
             </div>
             <div className='mx-auto text-2xl col-span-3'>{name}</div>

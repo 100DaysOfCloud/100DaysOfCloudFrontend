@@ -24,7 +24,7 @@ export default function LeaderboardEntry(props) {
                     id={githubProfile}
                     avatar={avatarImage}
                     name={name}
-                    size='small'
+                    size='sm'
                 />
             </div>
             <div className='mx-auto text-lg col-span-3'>{name}</div>

@@ -33,7 +33,7 @@ export default function HomeLeaderboard(props) {
                     return (
                         <div className='flex mb-2 items-center'>
                             <ProfileImage
-                                id={user.id}
+                                id={user.githubProfile}
                                 avatar={user.avatarImage}
                                 name={user.name}
                                 size='sm'

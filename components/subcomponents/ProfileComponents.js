@@ -25,7 +25,7 @@ const ProfileImage = ({ id, name, avatar, size }) => {
 
     return (
         <div
-            className={`rounded-full overflow-hidden h-${sizeMappings[size]} w-${sizeMappings[size]}`}>
+            className={`rounded-full overflow-hidden shadow-lg h-${sizeMappings[size]} w-${sizeMappings[size]}`}>
             <Link href={`/users/${id}`}>
                 <img
                     src={avatar}

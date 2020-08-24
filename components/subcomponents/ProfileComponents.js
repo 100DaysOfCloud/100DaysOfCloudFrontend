@@ -23,7 +23,7 @@ const ProfileImage = ({ id, name, avatar, size, link }) => {
         xl: 48,
     };
 
-    const showLink = typeof link == 'undefined' ? link : false;
+    const showLink = typeof link == 'undefined' ? true : link;
 
     const image = (
         <img

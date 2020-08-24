@@ -51,7 +51,9 @@ export default function Header(props) {
                         <button
                             className='bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg ml-10'
                             type='button'>
-                            <Link href='/login'>Log In</Link>
+                            <Link href='/login'>
+                                <span>Log In</span>
+                            </Link>
                         </button>
                     )}
                 </div>

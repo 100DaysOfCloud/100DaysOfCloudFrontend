@@ -15,7 +15,7 @@ const NameAndHandle = ({ name, handle, size }) => {
     );
 };
 
-const ProfileImage = ({ id, name, avatar, size }) => {
+const ProfileImage = ({ id, name, avatar, size, link }) => {
     const sizeMappings = {
         sm: 20,
         md: 32,
@@ -23,16 +23,26 @@ const ProfileImage = ({ id, name, avatar, size }) => {
         xl: 48,
     };
 
+    const showLink = typeof link == 'undefined' ? link : false;
+
+    const image = (
+        <img
+            src={avatar}
+            alt={`This is ${name}!`}
+            className='object-cover object-center'
+        />
+    );
+
     return (
         <div
             className={`rounded-full overflow-hidden shadow-lg h-${sizeMappings[size]} w-${sizeMappings[size]}`}>
-            <Link href={`/users/${id}`}>
-                <img
-                    src={avatar}
-                    alt={`This is ${name}!`}
-                    className='object-cover object-center cursor-pointer'
-                />
-            </Link>
+            {showLink ? (
+                <div className='cursor-pointer'>
+                    <Link href={`/users/${id}`}>{image}</Link>
+                </div>
+            ) : (
+                image
+            )}
         </div>
     );
 };

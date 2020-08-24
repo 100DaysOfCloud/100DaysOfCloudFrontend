@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Link from 'next/link';
 
 import { FaHome } from 'react-icons/fa';
 
 export default function LoginForm() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+
     return (
         <div className='w-1/2 mx-auto mt-20'>
             <form method='POST'>
@@ -33,6 +38,7 @@ export default function LoginForm() {
                             id='username'
                             className='rounded w-full py-2 px-4 text-gray-700 leading-tight'
                             placeholder='you@example.com'
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
                     <div className='w-3/4 mx-auto mb-8'>
@@ -43,8 +49,10 @@ export default function LoginForm() {
                         </label>
                         <input
                             id='password'
+                            type='password'
                             className='rounded w-full py-2 px-4 text-gray-700 leading-tight'
                             placeholder='************'
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <div className='w-3/4 mx-auto mb-8'>

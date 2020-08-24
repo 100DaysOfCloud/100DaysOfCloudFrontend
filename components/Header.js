@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import AccountDropdown from './AccountDropdown';
 
+import { AuthContext } from '../pages/_app';
+
 export default function Header(props) {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const { isAuthenticated, user, token } = useContext(AuthContext);
 
     return (
         <div className='pt-10 m-auto'>
@@ -41,14 +43,16 @@ export default function Header(props) {
                             Blog
                         </span>
                     </a>
-                    {loggedIn ? (
+                    {isAuthenticated ? (
                         <span className='ml-10'>
                             <AccountDropdown />
                         </span>
                     ) : (
-                        <span className='px-4 py-2 bg-gray-800 text-white rounded-lg'>
-                            Log In
-                        </span>
+                        <button
+                            className='bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg ml-10'
+                            type='button'>
+                            <Link href='/login'>Log In</Link>
+                        </button>
                     )}
                 </div>
             </div>

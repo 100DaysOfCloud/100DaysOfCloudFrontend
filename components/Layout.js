@@ -4,7 +4,10 @@ import Header from './Header';
 import Footer from './Footer';
 import Head from 'next/head';
 
-export default function Layout({ children, title }) {
+export default function Layout({ children, title, header, footer }) {
+    const showHeader = typeof header === 'undefined' ? true : header;
+    const showFooter = typeof footer === 'undefined' ? true : footer;
+
     return (
         <div className='w-5/6 m-auto'>
             <Head>
@@ -13,9 +16,9 @@ export default function Layout({ children, title }) {
                 </title>
                 <link rel='icon' href='/favicon.png' />
             </Head>
-            <Header />
+            {showHeader && <Header />}
             <div>{children}</div>
-            <Footer />
+            {showFooter && <Footer />}
         </div>
     );
 }

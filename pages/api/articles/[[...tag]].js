@@ -5,8 +5,6 @@ export default function articlesHandler(req, res) {
 
     const number = limit ? limit : articles.length;
 
-    console.log(tag);
-
     if (tag) {
         res.status(200).json(
             articles

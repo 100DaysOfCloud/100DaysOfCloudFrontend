@@ -19,42 +19,39 @@ export default function Header(props) {
                 </Link>
                 <div className='flex items-center'>
                     <Link href='/journeyers'>
-                        <span className='ml-10 text-xl cursor-default hover:underline'>
+                        <a className='ml-10 text-xl hover:underline'>
                             Journeyers
-                        </span>
+                        </a>
                     </Link>
                     <Link href='/leaderboard'>
-                        <span className='ml-10 text-xl cursor-default hover:underline'>
+                        <a className='ml-10 text-xl hover:underline'>
                             Leaderboard
-                        </span>
+                        </a>
                     </Link>
                     <Link href='/rules'>
-                        <span className='ml-10 text-xl cursor-default hover:underline'>
-                            Rules
-                        </span>
+                        <a className='ml-10 text-xl hover:underline'>Rules</a>
                     </Link>
                     <Link href='/faqs'>
-                        <span className='ml-10 text-xl cursor-default hover:underline'>
-                            FAQs
-                        </span>
+                        <a className='ml-10 text-xl  hover:underline'>FAQs</a>
                     </Link>
-                    <a href='https://blog.100daysofcloud.com' target='#'>
-                        <span className='ml-10 text-xl cursor-default hover:underline'>
-                            Blog
-                        </span>
+                    <a
+                        href='https://blog.100daysofcloud.com'
+                        target='#'
+                        className='ml-10 text-xl hover:underline'>
+                        Blog
                     </a>
                     {isAuthenticated ? (
                         <span className='ml-10'>
                             <AccountDropdown />
                         </span>
                     ) : (
-                        <button
-                            className='bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg ml-10'
-                            type='button'>
-                            <Link href='/login'>
-                                <span>Log In</span>
-                            </Link>
-                        </button>
+                        <Link href='/login'>
+                            <button
+                                className='bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg ml-10'
+                                type='button'>
+                                Log In
+                            </button>
+                        </Link>
                     )}
                 </div>
             </div>

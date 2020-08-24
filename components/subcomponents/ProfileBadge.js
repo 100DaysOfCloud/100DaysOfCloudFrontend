@@ -1,6 +1,5 @@
 import React from 'react';
 import { NameAndHandle, ProfileImage } from './ProfileComponents';
-import { FaAlignRight } from 'react-icons/fa';
 
 const ProfileBadge = (props) => {
     const textAlign = {

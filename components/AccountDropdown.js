@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+// zzz
+import {
+  useAuthFunctions,
+} from "../auth";
+
 export default function AccountDropdown() {
     const [clicked, setClicked] = useState(false);
+
+    // zzz
+    const { logout } = useAuthFunctions();
 
     // Handles clicking on the profile image
     function handleClick() {
@@ -57,16 +65,12 @@ export default function AccountDropdown() {
                 }>
                 <Link href='/settings'>
                     <div className='dropdown-entry hover:bg-gray-400'>
-                        Account setting
+                        Account settings
                     </div>
                 </Link>
-                <Link href='/submit'>
-                    <div className='dropdown-entry hover:bg-gray-400'>
-                        Submit an article
-                    </div>
-                </Link>
-                <Link href='/log-out'>
-                    <div className='dropdown-entry hover:bg-gray-400'>
+                <Link href='/'>
+                    <div className='dropdown-entry hover:bg-gray-400'
+                        onClick={() => logout()} >
                         Log out
                     </div>
                 </Link>

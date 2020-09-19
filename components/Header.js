@@ -2,10 +2,21 @@ import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import AccountDropdown from './AccountDropdown';
 
-import { AuthContext } from '../pages/_app';
+import {
+  useAuth,
+  useAuthFunctions,
+  getServerSideAuth,
+} from "../auth";
+
+export const getServerSideProps = async (context) => {
+  const initialAuth = getServerSideAuth(context.req);
+  return { props: { initialAuth } };
+};
 
 export default function Header(props) {
-    const { isAuthenticated, user, token } = useContext(AuthContext);
+    // const { isAuthenticated, user, token } = useContext(AuthContext);
+    const auth = useAuth(props.initialAuth);
+    const { login } = useAuthFunctions();
 
     return (
         <div className='pt-10 m-auto'>
@@ -40,7 +51,7 @@ export default function Header(props) {
                         className='ml-10 text-xl hover:underline'>
                         Blog
                     </a>
-                    {isAuthenticated ? (
+                    {auth ? (
                         <span className='ml-10'>
                             <AccountDropdown />
                         </span>
@@ -48,7 +59,8 @@ export default function Header(props) {
                         <Link href='/login'>
                             <button
                                 className='bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg ml-10'
-                                type='button'>
+                                type='button'
+                                onClick={() => login()} >
                                 Log In
                             </button>
                         </Link>

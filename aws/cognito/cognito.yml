@@ -1,0 +1,242 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 100DaysofCloud Cognito
+Parameters:
+  AuthNameProd:
+    Type: String
+    Description: Unique Auth Name for Prod Resources
+  AuthNameDev:
+    Type: String
+    Description: Unique Auth Name for Dev resources
+  LambdaBucketName:
+    Type: String
+    Description: Bucket containing Lambda deployment zip
+  LambdaZipKey:
+    Type: String
+    Description: Name of the Zip file containing lambda code
+
+Resources:
+  SNSRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal: 
+              Service: 
+                - "cognito-idp.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: "CognitoSNSPolicy"
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+              - Effect: "Allow"
+                Action: "sns:publish"
+                Resource: "*"
+
+  UserPoolDev:
+    Type: "AWS::Cognito::UserPool"
+    DependsOn: CognitoLambdaDev
+    Properties:
+      UserPoolName: !Sub ${AuthNameDev}-user-pool
+      AutoVerifiedAttributes:
+        - email
+      Schema:
+        - Name: name
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+        - Name: email
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+        - Name: twitter
+          AttributeDataType: String
+          Mutable: true
+      LambdaConfig:
+        PostConfirmation: !GetAtt CognitoLambdaDev.Arn
+      SmsConfiguration:
+        ExternalId: !Sub ${AuthNameDev}-external
+        SnsCallerArn: !GetAtt SNSRole.Arn
+  UserPoolProd:
+    Type: "AWS::Cognito::UserPool"
+    DependsOn: CognitoLambdaProd
+    Properties:
+      UserPoolName: !Sub ${AuthNameProd}-user-pool
+      AutoVerifiedAttributes:
+        - email
+      Schema:
+        - Name: name
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+        - Name: email
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+        - Name: twitter
+          AttributeDataType: String
+          Mutable: true
+      LambdaConfig:
+        PostConfirmation: !GetAtt CognitoLambdaProd.Arn
+      SmsConfiguration:
+        ExternalId: !Sub ${AuthNameProd}-external
+        SnsCallerArn: !GetAtt SNSRole.Arn
+
+  UserPoolClientDev:
+    Type: "AWS::Cognito::UserPoolClient"
+    Properties:
+      ClientName: !Sub ${AuthNameDev}-client
+      GenerateSecret: true
+      UserPoolId: !Ref UserPoolDev
+      CallbackURLs: [ 'http://localhost:8080/token' ]
+      LogoutURLs: [ 'http://localhost:8080' ]
+      AllowedOAuthFlows: [ 'implicit' ]
+      AllowedOAuthScopes: [ 'email', 'openid', 'profile']
+      SupportedIdentityProviders: [ 'COGNITO' ]
+      AllowedOAuthFlowsUserPoolClient: True
+  UserPoolClientProd:
+    Type: "AWS::Cognito::UserPoolClient"
+    Properties:
+      ClientName: !Sub ${AuthNameProd}-client
+      GenerateSecret: true
+      UserPoolId: !Ref UserPoolProd
+      CallbackURLs: [ 'https://100daysofcloud.com/token' ]
+      LogoutURLs: [ 'https://100daysofcloud.com' ]
+      AllowedOAuthFlows: [ 'implicit' ]
+      AllowedOAuthScopes: [ 'email', 'openid', 'profile']
+      SupportedIdentityProviders: [ 'COGNITO' ]
+      AllowedOAuthFlowsUserPoolClient: True
+
+  UserPoolDomainDev:
+    Type: "AWS::Cognito::UserPoolDomain"
+    Properties:
+      Domain: '100daysofcloud-stage'
+      UserPoolId: !Ref UserPoolDev
+  UserPoolDomainProd:
+    Type: "AWS::Cognito::UserPoolDomain"
+    Properties:
+      Domain: '100daysofcloud-live'
+      UserPoolId: !Ref UserPoolProd
+
+  UserTableDev: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: '100DaysofCloudUsers-Dev'
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "id"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "id"
+          KeyType: "HASH"
+  UserTableProd: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: '100DaysofCloudUsers-Prod'
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "id"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "id"
+          KeyType: "HASH"
+
+  CognitoLambdaDev:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: "Adds new cognito sign-ups to DynamoDB in development"
+      Code:
+        S3Bucket: !Ref LambdaBucketName
+        S3Key: !Ref LambdaZipKey
+      Role: !GetAtt
+        - CognitoLambdaRole
+        - Arn
+      Timeout: 60
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs12.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref UserTableDev
+          REGION: 'us-east-1'
+  CognitoLambdaProd:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: "Adds new cognito sign-ups to DynamoDB in production"
+      Code:
+        S3Bucket: !Ref LambdaBucketName
+        S3Key: !Ref LambdaZipKey
+      Role: !GetAtt
+        - CognitoLambdaRole
+        - Arn
+      Timeout: 60
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs12.x
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref UserTableProd
+          REGION: 'us-east-1'
+
+  UserPoolDevLambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:invokeFunction
+      Principal: cognito-idp.amazonaws.com
+      FunctionName: !Ref CognitoLambdaDev
+      SourceArn: !GetAtt UserPoolDev.Arn
+  UserPoolProdLambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:invokeFunction
+      Principal: cognito-idp.amazonaws.com
+      FunctionName: !Ref CognitoLambdaProd
+      SourceArn: !GetAtt UserPoolProd.Arn
+
+  CognitoLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+        - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
+        - arn:aws:iam::aws:policy/AmazonCognitoDeveloperAuthenticatedIdentities
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Path: /
+
+Outputs:
+  UserPoolIdDev:
+    Value: !Ref UserPoolDev
+    Export:
+      Name: "UserPoolDev::Id"
+  UserPoolClientIdDev:
+    Value: !Ref UserPoolClientDev
+    Export:
+      Name: "UserPoolClientDev::Id"
+  UserPoolIdPrd:
+    Value: !Ref UserPoolProd
+    Export:
+      Name: "UserPoolProd::Id"
+  UserPoolClientIdProd:
+    Value: !Ref UserPoolClientProd
+    Export:
+      Name: "UserPoolClientProd::Id"

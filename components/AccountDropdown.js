@@ -33,7 +33,6 @@ export default function AccountDropdown() {
 
         return document.removeEventListener('keydown', escFunction, false);
     });
-
     return (
         <div className='relative'>
             <button

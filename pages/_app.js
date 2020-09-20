@@ -31,7 +31,6 @@ Amplify.configure({
     },
   },
 });
-
 Auth.configure({
   oauth: {
     domain: process.env.IDP_DOMAIN,

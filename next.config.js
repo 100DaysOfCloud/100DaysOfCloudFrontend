@@ -7,9 +7,9 @@ module.exports = (phase) => {
         // environment varibales for local development
         env: {
           AWS_REGION: "us-east-1",
-          IDP_DOMAIN: "100daysofcloud.auth.us-east-1.amazoncognito.com",
-          USER_POOL_ID: "us-east-1_pIZbCBEft",
-          USER_POOL_CLIENT_ID: "2qko27e9na9fsopj0c4pas78p5",
+          IDP_DOMAIN: "100daysofcloud-stage.auth.us-east-1.amazoncognito.com",
+          USER_POOL_ID: "",
+          USER_POOL_CLIENT_ID: "",
           REDIRECT_SIGN_IN: "http://localhost:8080/token",
           REDIRECT_SIGN_OUT: "http://localhost:8080/",
           AUTH_COOKIE_DOMAIN: "localhost",
@@ -19,12 +19,13 @@ module.exports = (phase) => {
       return {
         // environment varibales for production
         env: {
-          IDP_DOMAIN: "",
+          AWS_REGION: "us-east-1",
+          IDP_DOMAIN: "100daysofcloud-live.auth.us-east-1.amazoncognito.com",
           USER_POOL_ID: "",
           USER_POOL_CLIENT_ID: "",
-          REDIRECT_SIGN_IN: "",
-          REDIRECT_SIGN_OUT: "",
-          AUTH_COOKIE_DOMAIN: "",
+          REDIRECT_SIGN_IN: "https://100daysofcloud.com/token",
+          REDIRECT_SIGN_OUT: "https://100daysofcloud.com",
+          AUTH_COOKIE_DOMAIN: "100daysofcloud.com",
         },
       };
   }

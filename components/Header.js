@@ -17,7 +17,6 @@ export default function Header(props) {
     // const { isAuthenticated, user, token } = useContext(AuthContext);
     const auth = useAuth(props.initialAuth);
     const { login } = useAuthFunctions();
-
     return (
         <div className='pt-10 m-auto'>
             <div className='flex items-center justify-between'>
